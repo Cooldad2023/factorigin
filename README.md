@@ -1,3 +1,3 @@
-# Phase_2_Community_Formation
+# Phase_4_Public_Beta_Governance
 
 Placeholder for project documentation.
