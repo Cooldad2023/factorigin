@@ -1,3 +1,3 @@
-# Phase_3_Core_Platform_Build
+# Phase_1_Prototype
 
 Placeholder for project documentation.
