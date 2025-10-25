@@ -1,2 +1,3 @@
-# factorigin
-Open-source, community-driven platform for fact verification, transparency, and neutral information sharing.
+# Phase_3_Core_Platform_Build
+
+Placeholder for project documentation.
