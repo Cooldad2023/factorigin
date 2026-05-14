@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WithPal — A FactOrigin Project</title>
+<meta name="description" content="WithPal connects people in crisis or loneliness with a trusted person who acts on their behalf. Free. Global. A FactOrigin project." />
+<meta property="og:title" content="WithPal — You are not alone." />
+<meta property="og:description" content="When crisis hits and you can't act alone — WithPal sends someone to act for you. Free. Available worldwide." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1D9E75;
+    --green-light: #E1F5EE;
+    --green-dark: #085041;
+    --green-mid: #0F6E56;
+    --green-border: #5DCAA5;
+    --text: #1a1a1a;
+    --text-sec: #6b6b6b;
+    --border: rgba(0,0,0,0.1);
+    --border-hover: rgba(0,0,0,0.2);
+    --bg: #ffffff;
+    --bg-sec: #f7f7f5;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #f0f0ee;
+      --text-sec: #a0a09a;
+      --border: rgba(255,255,255,0.1);
+      --border-hover: rgba(255,255,255,0.2);
+      --bg: #111110;
+      --bg-sec: #1a1a18;
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  /* NAV */
+  nav {
+    border-bottom: 0.5px solid var(--border);
+    padding: 14px 0;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+  }
+
+  nav .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--green); }
+
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-sec);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+  .lang-wrap { position: relative; }
+
+  .lang-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-sec);
+    border: 0.5px solid var(--border-hover);
+    padding: 5px 12px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: transparent;
+    transition: background 0.15s;
+  }
+
+  .lang-btn:hover { background: var(--bg-sec); }
+
+  .lang-drop {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    background: var(--bg);
+    border: 0.5px solid var(--border-hover);
+    border-radius: var(--radius-sm);
+    padding: 6px 0;
+    min-width: 150px;
+    z-index: 200;
+  }
+
+  .lang-drop.open { display: block; }
+
+  .lang-opt {
+    padding: 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lang-opt:hover { background: var(--bg-sec); }
+  .lang-opt.sel { color: var(--green); }
+
+  /* SECTIONS */
+  section { padding: 56px 0; border-bottom: 0.5px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+
+  .sec-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-sec);
+    margin-bottom: 24px;
+  }
+
+  /* HERO */
+  .hero { text-align: center; }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 1px;
+    padding: 5px 14px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 8vw, 80px);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--green); }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--text-sec);
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 420px;
+    margin: 0 auto 32px;
+  }
+
+  .hero-sub strong { color: var(--text); font-weight: 500; }
+
+  .hero-btns {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-p {
+    background: var(--green);
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-p:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .btn-s {
+    background: transparent;
+    color: var(--text);
+    border: 0.5px solid var(--border-hover);
+    padding: 14px 30px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-s:hover { background: var(--bg-sec); }
+
+  /* NUMBERS */
+  .numbers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 40px;
+  }
+
+  .num {
+    padding: 20px 16px;
+    text-align: center;
+    border-right: 0.5px solid var(--border);
+  }
+
+  .num:last-child { border-right: none; }
+
+  .num h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--green);
+    line-height: 1;
+  }
+
+  .num p { font-size: 11px; color: var(--text-sec); margin-top: 5px; font-weight: 300; }
+
+  /* STEPS */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .step {
+    padding: 22px 18px;
+    border-right: 0.5px solid var(--border);
+  }
+
+  .step:last-child { border-right: none; }
+
+  .step-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--green);
+    opacity: 0.35;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .step h3 { font-size: 14px; font-weight: 500; margin-bottom: 7px; }
+  .step p { font-size: 12px; color: var(--text-sec); font-weight: 300; line-height: 1.65; }
+
+  /* WHO GRID */
+  .who-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+  }
+
+  .who-card {
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    transition: border-color 0.2s;
+  }
+
+  .who-card:hover { border-color: var(--border-hover); }
+  .who-card i { font-size: 20px; color: var(--text-sec); display: block; margin-bottom: 10px; }
+  .who-card h4 { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .who-card p { font-size: 11px; color: var(--text-sec); font-weight: 300; line-height: 1.6; }
+
+  /* FORMS */
+  .join-wrap {
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .join-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .jtab {
+    padding: 14px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text-sec);
+    transition: background 0.15s;
+    border-right: 0.5px solid var(--border);
+  }
+
+  .jtab:last-child { border-right: none; }
+  .jtab.on { background: var(--bg-sec); color: var(--text); }
+
+  .jbody { padding: 24px; }
+  .jbody h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+
+  .jbody .sub { font-size: 13px; color: var(--text-sec); font-weight: 300; margin-bottom: 20px; line-height: 1.6; }
+
+  .fields { display: grid; gap: 10px; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  @media (max-width: 480px) { .two { grid-template-columns: 1fr; } }
+
+  .fields input,
+  .fields select,
+  .fields textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 0.5px solid var(--border-hover);
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    border-radius: var(--radius-sm);
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .fields input:focus,
+  .fields select:focus,
+  .fields textarea:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(29,158,117,0.1);
+  }
+
+  .fields textarea { resize: vertical; min-height: 80px; }
+
+  .sbtn {
+    width: 100%;
+    background: var(--green);
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 4px;
+    letter-spacing: 0.3px;
+  }
+
+  .sbtn:hover { opacity: 0.82; }
+
+  .privacy-note {
+    font-size: 11px;
+    color: var(--text-sec);
+    text-align: center;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-weight: 300;
+  }
+
+  .thanks {
+    display: none;
+    text-align: center;
+    padding: 40px 16px;
+  }
+
+  .thanks i { font-size: 36px; color: var(--green); display: block; margin-bottom: 14px; }
+
+  .thanks h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .thanks p { font-size: 14px; color: var(--text-sec); font-weight: 300; line-height: 1.7; }
+
+  /* TRUST */
+  .trust-strip {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 24px;
+    background: var(--green-light);
+    border-radius: var(--radius);
+    margin-top: 0;
+  }
+
+  .trust-strip i { font-size: 18px; color: var(--green-mid); flex-shrink: 0; margin-top: 2px; }
+  .trust-strip p { font-size: 13px; color: var(--green-dark); font-weight: 300; line-height: 1.7; }
+  .trust-strip p strong { font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-top: 0.5px solid var(--border);
+  }
+
+  footer p { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-sec); letter-spacing: 1px; }
+
+  .foot-links { display: flex; gap: 16px; }
+
+  .foot-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-sec);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+
+  .foot-links a:hover { color: var(--text); }
+
+  /* LANG VIEWS */
+  .lview { display: none; }
+  .lview.on { display: block; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .step { border-bottom: 0.5px solid var(--border); }
+    .step:nth-child(odd) { border-right: 0.5px solid var(--border); }
+    .step:nth-child(even) { border-right: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container inner">
+    <a href="https://cooldad2023.github.io/factorigin" class="logo">Fact<span>Origin</span> · WithPal</a>
+    <div class="nav-links">
+      <a href="https://cooldad2023.github.io/factorigin">Home</a>
+      <a href="#how">How it works</a>
+      <a href="#join" class="active">Join</a>
+    </div>
+    <div class="lang-wrap">
+      <button class="lang-btn" onclick="toggleLang()" id="lbtn">
+        <i class="ti ti-world"></i>
+        <span id="lang-label">English</span>
+      </button>
+      <div class="lang-drop" id="ldrop">
+        <div class="lang-opt sel" onclick="setLang('en','English')">🌍 English</div>
+        <div class="lang-opt" onclick="setLang('no','Norsk')">🇳🇴 Norsk</div>
+        <div class="lang-opt" onclick="setLang('es','Español')">🇪🇸 Español</div>
+        <div class="lang-opt" onclick="setLang('de','Deutsch')">🇩🇪 Deutsch</div>
+        <div class="lang-opt" onclick="setLang('fr','Français')">🇫🇷 Français</div>
+        <div class="lang-opt" onclick="setLang('ar','العربية')">🌍 العربية</div>
+        <div class="lang-opt" onclick="setLang('pt','Português')">🇧🇷 Português</div>
+        <div class="lang-opt" onclick="setLang('sw','Kiswahili')">🌍 Kiswahili</div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- HERO — language versions -->
+  <section class="hero">
+
+    <div class="lview on" id="v-en">
+      <div class="hero-badge"><i class="ti ti-world"></i> Open to everyone, everywhere</div>
+      <h1>You are <em>not</em><br>alone.</h1>
+      <p class="hero-sub">When crisis hits and you can't act alone — <strong>WithPal sends someone to act for you.</strong> A real, trusted person. Free. Available worldwide.</p>
+    </div>
+
+    <div class="lview" id="v-no">
+      <div class="hero-badge"><i class="ti ti-world"></i> Åpen for alle, overalt</div>
+      <h1>Du er <em>ikke</em><br>alene.</h1>
+      <p class="hero-sub">Når krisen treffer og du ikke kan handle alene — <strong>sender WithPal noen til å handle for deg.</strong> En ekte, betrodd person. Gratis. Tilgjengelig over hele verden.</p>
+    </div>
+
+    <div class="lview" id="v-es">
+      <div class="hero-badge"><i class="ti ti-world"></i> Abierto a todos, en todo el mundo</div>
+      <h1>No estás <em>solo.</em></h1>
+      <p class="hero-sub">Cuando la crisis llega y no puedes actuar solo — <strong>WithPal envía a alguien a actuar por ti.</strong> Una persona real y de confianza. Gratis. En todo el mundo.</p>
+    </div>
+
+    <div class="lview" id="v-de">
+      <div class="hero-badge"><i class="ti ti-world"></i> Offen für alle, überall</div>
+      <h1>Du bist <em>nicht</em><br>allein.</h1>
+      <p class="hero-sub">Wenn die Krise kommt und du nicht allein handeln kannst — <strong>schickt WithPal jemanden, der für dich handelt.</strong> Eine echte, vertrauenswürdige Person. Kostenlos. Weltweit.</p>
+    </div>
+
+    <div class="lview" id="v-fr">
+      <div class="hero-badge"><i class="ti ti-world"></i> Ouvert à tous, partout</div>
+      <h1>Vous n'êtes <em>pas</em><br>seul.</h1>
+      <p class="hero-sub">Quand la crise arrive et que vous ne pouvez pas agir seul — <strong>WithPal envoie quelqu'un agir pour vous.</strong> Une vraie personne de confiance. Gratuit. Dans le monde entier.</p>
+    </div>
+
+    <div class="lview" id="v-ar">
+      <div class="hero-badge"><i class="ti ti-world"></i> مفتوح للجميع في كل مكان</div>
+      <h1 dir="rtl">أنت <em>لست</em><br>وحدك.</h1>
+      <p class="hero-sub" dir="rtl">عندما تحلّ الأزمة — <strong>يرسل WithPal شخصاً ليتصرف نيابةً عنك.</strong> شخص حقيقي وموثوق. مجاني. متاح في جميع أنحاء العالم.</p>
+    </div>
+
+    <div class="lview" id="v-pt">
+      <div class="hero-badge"><i class="ti ti-world"></i> Aberto a todos, em todo o mundo</div>
+      <h1>Você não está <em>sozinho.</em></h1>
+      <p class="hero-sub">Quando a crise chega — <strong>o WithPal envia alguém para agir por você.</strong> Uma pessoa real e de confiança. Gratuito. Disponível em todo o mundo.</p>
+    </div>
+
+    <div class="lview" id="v-sw">
+      <div class="hero-badge"><i class="ti ti-world"></i> Wazi kwa wote, kila mahali</div>
+      <h1>Hujabaki <em>peke</em><br>yako.</h1>
+      <p class="hero-sub">Wakati msiba unapofika — <strong>WithPal anatuma mtu kukutendea.</strong> Mtu halisi wa kuamini. Bila malipo. Duniani kote.</p>
+    </div>
+
+    <div class="hero-btns">
+      <button class="btn-p" onclick="openTab('need')">I need help <i class="ti ti-arrow-right"></i></button>
+      <button class="btn-s" onclick="openTab('pal')">I want to help others</button>
+    </div>
+
+    <div class="numbers">
+      <div class="num"><h3>0</h3><p>Cost to get help</p></div>
+      <div class="num"><h3>195</h3><p>Countries served</p></div>
+      <div class="num"><h3>24h</h3><p>Pal matched within</p></div>
+      <div class="num"><h3>1</h3><p>Standard: perfect</p></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <p class="sec-label">How it works</p>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><h3>Tell us what you need</h3><p>One simple form. Plain language. No paperwork. Just describe what you can't do alone.</p></div>
+      <div class="step"><div class="step-n">2</div><h3>We match you with a pal</h3><p>A verified, trained person — nearby or anywhere in the world — who speaks your language.</p></div>
+      <div class="step"><div class="step-n">3</div><h3>You approve them</h3><p>See who they are before anything happens. You stay in complete control. Always.</p></div>
+      <div class="step"><div class="step-n">4</div><h3>They act. Perfectly.</h3><p>Your pal handles the task and reports back. You never have to face it alone.</p></div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section>
+    <p class="sec-label">Who this is for</p>
+    <div class="who-grid">
+      <div class="who-card"><i class="ti ti-alert-circle"></i><h4>People in crisis</h4><p>Medical, mental health, or any moment where acting alone isn't possible.</p></div>
+      <div class="who-card"><i class="ti ti-heart"></i><h4>The lonely</h4><p>No family nearby. No one to call. Facing life's systems alone.</p></div>
+      <div class="who-card"><i class="ti ti-language"></i><h4>Language barriers</h4><p>Living somewhere you can't navigate official systems fluently.</p></div>
+      <div class="who-card"><i class="ti ti-wheelchair"></i><h4>Limited mobility</h4><p>When illness or disability makes a simple task impossible.</p></div>
+      <div class="who-card"><i class="ti ti-home-off"></i><h4>Far from family</h4><p>Elderly, isolated, or simply far from the people who would normally help.</p></div>
+      <div class="who-card"><i class="ti ti-world"></i><h4>Anyone, anywhere</h4><p>If you need someone to act for you — for any real reason — we are here.</p></div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section id="join">
+    <p class="sec-label">Join WithPal</p>
+    <div class="join-wrap">
+      <div class="join-tabs">
+        <div class="jtab on" id="tab-need" onclick="openTab('need')">I need a pal</div>
+        <div class="jtab" id="tab-pal" onclick="openTab('pal')">I want to be a pal</div>
+      </div>
+
+      <div class="jbody" id="form-need">
+        <h3>Request a pal</h3>
+        <p class="sub">Free, private, and simple. Tell us what you need — we handle the rest.</p>
+        <div class="fields" id="fn-fields">
+          <div class="two">
+            <input type="text" placeholder="First name (optional)" />
+            <select id="n-country">
+              <option value="">Your country…</option>
+              <option>Norway</option><option>Sweden</option><option>Denmark</option><option>Finland</option><option>Germany</option><option>Netherlands</option><option>United Kingdom</option><option>United States</option><option>France</option><option>Spain</option><option>Italy</option><option>Poland</option><option>Brazil</option><option>Nigeria</option><option>Kenya</option><option>South Africa</option><option>India</option><option>Philippines</option><option>Japan</option><option>Other</option>
+            </select>
+          </div>
+          <select id="n-type">
+            <option value="">What do you need help with?</option>
+            <option>Making a phone call on my behalf</option>
+            <option>Booking a medical appointment</option>
+            <option>Handling official paperwork</option>
+            <option>Sending a letter or message</option>
+            <option>Crisis support — I need someone now</option>
+            <option>Regular check-ins and presence</option>
+            <option>Something else</option>
+          </select>
+          <textarea placeholder="Tell us a little more (optional). Everything is private and confidential."></textarea>
+          <button class="sbtn" onclick="submitNeed()">Find my pal — it's free</button>
+          <p class="privacy-note"><i class="ti ti-lock"></i> Private. Never sold or shared. Never used to train AI.</p>
+        </div>
+        <div class="thanks" id="ty-need">
+          <i class="ti ti-heart"></i>
+          <h3>You're not alone.</h3>
+          <p>We have your request. A pal will be matched to you within 24 hours.<br>You'll approve them before anything happens.</p>
+        </div>
+      </div>
+
+      <div class="jbody" id="form-pal" style="display:none">
+        <h3>Become a pal</h3>
+        <p class="sub">Offer your time to someone who truly needs it. Verified, trained, and guided by us.</p>
+        <div class="fields" id="fp-fields">
+          <div class="two">
+            <input type="text" placeholder="First name" />
+            <select id="p-country">
+              <option value="">Your country…</option>
+              <option>Norway</option><option>Sweden</option><option>Denmark</option><option>Finland</option><option>Germany</option><option>Netherlands</option><option>United Kingdom</option><option>United States</option><option>France</option><option>Spain</option><option>Italy</option><option>Poland</option><option>Brazil</option><option>Nigeria</option><option>Kenya</option><option>South Africa</option><option>India</option><option>Philippines</option><option>Japan</option><option>Other</option>
+            </select>
+          </div>
+          <input type="text" placeholder="Languages you speak (e.g. English, Spanish, Arabic)" />
+          <select id="p-skill">
+            <option value="">I can best help with…</option>
+            <option>Phone calls and official communication</option>
+            <option>Medical or legal navigation</option>
+            <option>Emotional support and check-ins</option>
+            <option>Paperwork and administration</option>
+            <option>Practical errands and tasks</option>
+            <option>All of the above</option>
+          </select>
+          <button class="sbtn" onclick="submitPal()">Apply to be a pal</button>
+          <p class="privacy-note"><i class="ti ti-lock"></i> Private. Never sold or shared. Never used to train AI.</p>
+        </div>
+        <div class="thanks" id="ty-pal">
+          <i class="ti ti-check"></i>
+          <h3>Thank you.</h3>
+          <p>Your application has been received. We review every one carefully<br>and will be in touch within 48 hours.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-strip" style="margin-top:16px">
+      <i class="ti ti-shield-check"></i>
+      <p><strong>Your data is yours.</strong> WithPal is a project of FactOrigin — an open-source, community-driven platform built on radical transparency. We collect only what connects you to a pal. We never sell, advertise with, or use your information to train AI. Ever.</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;width:100%">
+    <p>withpal · a factorigin project · github.com/Cooldad2023/factorigin</p>
+    <div class="foot-links">
+      <a href="https://cooldad2023.github.io/factorigin">FactOrigin home</a>
+      <a href="https://github.com/Cooldad2023/factorigin">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleLang(){
+  document.getElementById('ldrop').classList.toggle('open');
+}
+document.addEventListener('click', function(e){
+  if(!e.target.closest('#lbtn') && !e.target.closest('#ldrop')){
+    document.getElementById('ldrop').classList.remove('open');
+  }
+});
+function setLang(l, label){
+  document.querySelectorAll('.lang-opt').forEach(o => o.classList.remove('sel'));
+  document.querySelectorAll('.lview').forEach(v => v.classList.remove('on'));
+  event.target.classList.add('sel');
+  document.getElementById('lang-label').textContent = label;
+  document.getElementById('ldrop').classList.remove('open');
+  var el = document.getElementById('v-' + l);
+  if(el) el.classList.add('on');
+}
+function openTab(t){
+  document.getElementById('tab-need').classList.toggle('on', t === 'need');
+  document.getElementById('tab-pal').classList.toggle('on', t === 'pal');
+  document.getElementById('form-need').style.display = t === 'need' ? '' : 'none';
+  document.getElementById('form-pal').style.display = t === 'pal' ? '' : 'none';
+  document.getElementById('join').scrollIntoView({behavior:'smooth', block:'start'});
+}
+function submitNeed(){
+  var c = document.getElementById('n-country').value;
+  var h = document.getElementById('n-type').value;
+  if(!c || !h){ alert('Please select your country and what you need help with.'); return; }
+  document.getElementById('fn-fields').style.display = 'none';
+  document.getElementById('ty-need').style.display = 'block';
+}
+function submitPal(){
+  var c = document.getElementById('p-country').value;
+  if(!c){ alert('Please select your country.'); return; }
+  document.getElementById('fp-fields').style.display = 'none';
+  document.getElementById('ty-pal').style.display = 'block';
+}
+</script>
+</body>
+</html>
